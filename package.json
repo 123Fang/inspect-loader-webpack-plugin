@@ -1,5 +1,5 @@
 {
-  "name": "inspect-webpack-plugin",
+  "name": "inspect-loader-webpack-plugin",
   "version": "0.0.2",
   "description": "A webpack plugin for inspecting module transform of loaders.",
   "main": "build/node/index.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/123Fang/inspect-webpack-plugin.git"
+    "url": "git+https://github.com/123Fang/inspect-loader-webpack-plugin.git"
   },
   "author": "123Fang",
   "license": "MIT",
@@ -26,8 +26,7 @@
   "scripts": {
     "build:client": "cd src/client && pnpm build",
     "watch:client": "cd src/client && pnpm run start",
-    "watch:example": "webpack-dev-server --config ./example/webpack.config.ts --mode development",
-    "build:example": "webpack --config ./example/webpack.config.ts --mode production",
+    "watch:example": "cd example && pnpm run serve",
     "lint": "npm run eslint",
     "eslint": "eslint --ext .ts,.tsx ./",
     "eslint:fix": "npm run eslint -- --fix"

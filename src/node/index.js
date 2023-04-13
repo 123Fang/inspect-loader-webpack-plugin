@@ -76,7 +76,7 @@ module.exports = class InspectWebpackPlugin {
 
   createServer() {
     const app = express();
-    // app.use(express.static(path.join(__dirname, '../../build/client')));
+    app.use(express.static(path.join(__dirname, '../../build/client')));
     app.get('/data', (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.send({
@@ -87,8 +87,7 @@ module.exports = class InspectWebpackPlugin {
     });
 
     app.listen(9009, () => {
-      console.log('server ok');
-      console.log('\n');
+      console.log('inspect running at port: 9009')
     });
   }
 }
