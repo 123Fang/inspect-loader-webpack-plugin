@@ -10,6 +10,9 @@ type TransformMap = Record<string, TransformInfo[]>;
 interface TransformInfo {
   name: string;
   result: string;
+  beforeResult: string;
   start: number;
   end: number;
+  oldCode: string;
+  newCode: string
 }

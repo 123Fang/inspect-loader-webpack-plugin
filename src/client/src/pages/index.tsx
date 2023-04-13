@@ -73,8 +73,8 @@ export default function Home() {
               {
                 transformMap[item]
                   .filter(({ name }) => name !== '__LOAD__')
-                  .map(({ name }) => (
-                    <Tag key={name} style={{ color: '#707173', borderRadius: 10 }}>{name}</Tag>
+                  .map(({ name },index) => (
+                    <Tag key={name + index} style={{ color: '#707173', borderRadius: 10 }}>{name}</Tag>
                   ))
               }
             </div>
@@ -122,7 +122,10 @@ export default function Home() {
           </Col>
           <Col span={18}>
             <CodeDiffViewer
-              oldCode={transformIndex > 0 ? transformMap[moduleId]?.[transformIndex - 1].result : ''}
+              // oldCode={transformIndex > 0 ? transformMap[moduleId]?.[transformIndex - 1].result : ''}
+              // newCode={transformMap[moduleId]?.[transformIndex].result}
+              // oldCode={transformIndex > 0 ? transformMap[moduleId]?.[transformIndex - 1].result : ''}
+              oldCode={transformMap[moduleId]?.[transformIndex].beforeResult + '' }
               newCode={transformMap[moduleId]?.[transformIndex].result}
             />
           </Col>
