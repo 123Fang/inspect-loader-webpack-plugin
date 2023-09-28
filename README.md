@@ -5,12 +5,12 @@
 
 inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程中loader对模块的转换和每个loader的耗时！
 <br>
-1
+<img width="1506" alt="截屏2023-09-28 16 20 15" src="https://github.com/123Fang/inspect-loader-webpack-plugin/assets/38906235/af890655-296b-48fc-9d7c-904f3266a7a9">
 
-![](./images/demo2.png) 
+
 <br>
+<img width="1515" alt="截屏2023-09-28 16 20 59" src="https://github.com/123Fang/inspect-loader-webpack-plugin/assets/38906235/b1899d36-9f16-48d4-bb4a-f16540dedfd4">
 
-![](./images/demo1.png)
 
 #### 用法：
 <br>
