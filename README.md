@@ -1,6 +1,6 @@
 ## inspect-loader-webpack-plugin
 
-`用来学习 webpack-plugin loader 的一个玩具`
+`用来学习 webpack-plugin 和 loader 的一个工具`
 <br>
 
 inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程中loader对模块的转换！

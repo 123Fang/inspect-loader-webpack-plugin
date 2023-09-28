@@ -1,4 +1,6 @@
-const InspectWebpackPlugin = require('../src/node/index.js')
+// const InspectWebpackPlugin = require('../src/node/index.js')
+
+const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
 
 module.exports = {
   configureWebpack: {
@@ -15,5 +17,4 @@ module.exports = {
       })
     ]
   }
-
 }

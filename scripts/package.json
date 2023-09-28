@@ -1,0 +1,17 @@
+{
+  "name": "inspect-loader-webpack-plugin",
+  "version": "0.0.1",
+  "description": "查看webpack中loader对模块的处理的前后code对比，和 耗时",
+  "main": "node/index.js",
+  "module": "node/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/123Fang/inspect-loader-webpack-plugin.git"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "find-up": "^5.0.0",
+    "fs-extra": "^10.1.0"
+  }
+}

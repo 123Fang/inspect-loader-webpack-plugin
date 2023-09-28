@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/123Fang/inspect-loader-webpack-plugin.git"
+    "url": "git+https://github.com/123Fang/inspect-loader-webpack-plugin"
   },
   "author": "123Fang",
   "license": "MIT",
@@ -24,6 +24,8 @@
     "node": ">=14"
   },
   "scripts": {
+    "build": "pnpm build:client && pnpm build:node",
+    "build:node": "node ./scripts/build-node.js",
     "build:client": "cd src/client && pnpm build",
     "watch:client": "cd src/client && pnpm run start",
     "watch:example": "cd example && pnpm run serve",

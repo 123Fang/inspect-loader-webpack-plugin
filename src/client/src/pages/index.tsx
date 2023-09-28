@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Drawer, List, Col, Row, Tag, notification } from 'antd';
+import { Drawer, List, Col, Row, Tag, notification, Space, Tooltip, Button } from 'antd';
 import styles from './index.module.css';
 import CodeDiffViewer from '@/components/CodeDiffViewer';
 import { SERVER_HOST } from '@/constants';
@@ -46,15 +46,21 @@ export default function Home() {
   }, []);
 
   const moduleIds = Reflect.ownKeys(transformMap);
+  const loaderType = (name: string): string => {
+    return name.indexOf('Pitch') > -1 ? 'processing' : 'success';
+  };
 
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.title}>Inspect Webpack Plugin</div>
+        <div className={styles.title}>Inspect Webpack Plugin </div>
+        <Space> Loader类型： <Tag color="success" style={{ color: '#707173', borderRadius: 5 }}> Normal Loader</Tag> <Tag color="processing" style={{ color: '#707173', borderRadius: 5 }}> Pitch Loader</Tag></Space>
+        {/** 刷新按钮 */}
         <div className={styles.operation}>
           <ReloadOutlined className={styles.icon} onClick={() => fetchData()} />
         </div>
       </div>
+      {/** 主列表 */}
       <List
         bordered
         loading={loading}
@@ -68,15 +74,17 @@ export default function Home() {
               setTransformIndex(0); // init to `__load__`
             }}
           >
-            <div>{formatFilepath(item, contextPath)}</div>
+            <div style={{ marginBottom: '10px' }}>{formatFilepath(item, contextPath)}</div>
             <div>
-              {
+              <Space size={[8, 16]} wrap>
+                {
                 transformMap[item]
                   .filter(({ name }) => name !== '__LOAD__')
-                  .map(({ name },index) => (
-                    <Tag key={name + index} style={{ color: '#707173', borderRadius: 10 }}>{name}</Tag>
+                  .map(({ name }, index) => (
+                    <Tag key={name + index} color={loaderType(name)} style={{ color: '#707173', borderRadius: 5 }}>{name}</Tag>
                   ))
-              }
+                }
+              </Space>
             </div>
           </List.Item>
         )}
@@ -125,7 +133,7 @@ export default function Home() {
               // oldCode={transformIndex > 0 ? transformMap[moduleId]?.[transformIndex - 1].result : ''}
               // newCode={transformMap[moduleId]?.[transformIndex].result}
               // oldCode={transformIndex > 0 ? transformMap[moduleId]?.[transformIndex - 1].result : ''}
-              oldCode={transformMap[moduleId]?.[transformIndex].beforeResult + '' }
+              oldCode={`${transformMap[moduleId]?.[transformIndex].beforeResult}`}
               newCode={transformMap[moduleId]?.[transformIndex].result}
             />
           </Col>
