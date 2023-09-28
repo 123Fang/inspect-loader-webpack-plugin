@@ -7,10 +7,10 @@ inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程�
 <br>
 1
 
-![](.images/demo2.png) 
+![](./images/demo2.png) 
 <br>
 
-![](.images/demo1.png)
+![](./images/demo1.png)
 
 #### 用法：
 <br>
