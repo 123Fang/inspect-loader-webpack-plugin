@@ -6,6 +6,7 @@
 inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程中loader对模块的转换和每个loader的耗时！
 <br>
 
+![](./images/a.png)     
 
 
 #### 用法：
