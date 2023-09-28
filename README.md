@@ -5,9 +5,12 @@
 
 inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程中loader对模块的转换和每个loader的耗时！
 <br>
+1
 
-![](./images/a.png)     
+![](./raw/main/images/demo2.png) 
+<br>
 
+![](./raw/main/images/demo1.png)
 
 #### 用法：
 <br>
@@ -32,7 +35,7 @@ const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
 ```
 <br>
 
-##### 第三步启动你自己的项目
+##### 第三步启动你自己的项目:
 ```shell
 npm run dev
 或
