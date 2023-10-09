@@ -25,7 +25,7 @@ pnpm i inspect-loader-webpack-plugin -D
 
 ##### 第二步配置：
 ```js
-// vue.config.js
+// webpack.config.js 或 vue.config.js
 const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
 
  plugins: [
@@ -41,12 +41,10 @@ const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
 ##### 第三步启动你自己的项目:
 ```shell
 npm run dev
-或
-npm run serve
 ```
 <br>
 
-#### 第四步，浏览器打开你本地 http://localhost:9009 完毕！
+##### 第四步，浏览器打开你本地 http://localhost:9009 完毕！
 
 <br>
 <br>
