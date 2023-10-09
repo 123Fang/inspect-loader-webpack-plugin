@@ -30,8 +30,9 @@ const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
 
  plugins: [
       new InspectWebpackPlugin({
-        // 可以手动排除你不需要查看的loader。
-        // 这里排出 cache-loader 是为了收集所有 loader工 作的结果，不用缓存。
+        // exclude: 排除你不需要查看的loader。
+        // 这里排出 cache-loader 是为了收集所有 loader工作的结果. 
+        exclude: ['cache-loader']
       })
     ]
 ```
