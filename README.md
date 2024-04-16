@@ -26,6 +26,7 @@ pnpm i inspect-loader-webpack-plugin -D
 <br>
 
 ##### 第二步配置：
+
 ```js
 // webpack.config.js 或 vue.config.js
 const InspectWebpackPlugin = require('inspect-loader-webpack-plugin')
