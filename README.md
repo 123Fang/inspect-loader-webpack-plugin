@@ -1,6 +1,12 @@
 ## inspect-loader-webpack-plugin
 
-`用来学习 webpack-plugin 和 loader 的一个工具`
+### 这个插件有什么用？
+
+可以轻松查看编译后的代码，了解代码如何被 babel,vue编译器转换 ,scss less 编译器转换，可以加深对框架底层细节或一些构建时的工具链的理解。    
+比如：一个 .vue 组件，在webpack中会经过哪些处理？它的tempalte, script,style都是如何处理的？处理前源码和处理后的源码是什么样子？能否展示出处理前/后的代码，并展示出他们之间的差异？   
+
+
+
 <br>
 
 inspect-loader-webpack-plugin 用可视化的方式查看在webpack构建过程中loader对模块的转换和每个loader的耗时！
