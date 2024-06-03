@@ -22,8 +22,13 @@ module.exports = class InspectWebpackPlugin {
 
     compiler.hooks.compilation.tap('my-inspect-webpack-plugin', (compilation) => {
       const { normalModuleLoader } = compilation.hooks;
+      // 在 module 一开始构建的过程中，首先会创建一个 loaderContext 对象，
+      // 它和这个 module 是一一对应的关系，而这个 module 所使用的所有 loaders 都会共享这个 loaderContext 对象。
+
       // normalModuleLoader 的钩子函数，开发者可以利用这个钩子来对 loaderContext 进行拓展，在loader.run之前，所以loader执行函数中可以this.loaderContext的拓展
       normalModuleLoader.tap('my-inspect-webpack-plugin', (loaderContext) => {
+        // 加载模块时，会触发normalModuleLoader钩子，可以拿到这个模块对应的loaderContext对象。
+        // loaderContext对象中包含处理这个模块的所有loaders。
         loaderContext['my-inspect-webpack-plugin'] = this.recordTransformInfo.bind(this);
       });
 

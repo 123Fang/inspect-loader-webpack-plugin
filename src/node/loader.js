@@ -28,7 +28,8 @@ const PLUGIN_NAME = 'my-inspect-webpack-plugin';
 
 
 function pitch(p) { // p绝对路径
-  const callback = this[PLUGIN_NAME];
+  // collectCode
+  const collectCode = this[PLUGIN_NAME];
   const loaderPaths = this.loaders.map((loader) => loader.path);
 
 
@@ -36,9 +37,6 @@ function pitch(p) { // p绝对路径
     const loaderName = getLoaderName(path);
 
     const wrapFunc = (func) => function proxyLoader(...args1) {
-      if (func.type === 'Pitch') {
-        // debugger;
-      }
       /**
        * 收集 source
        * 思路：loader函数转换后的字符串，需要继续往下传给下一个loader或丢给webpack。往下传的方式是以下三种：
@@ -60,7 +58,7 @@ function pitch(p) { // p绝对路径
           return function (...args) {
             const end = Date.now();
             const [, source] = args;
-            callback({
+            collectCode({
               id: resourcePath,
               name: `${loaderName}【${func.type}】`,
               result: source,
@@ -72,12 +70,13 @@ function pitch(p) { // p绝对路径
             return asyncCallback.apply(this, args);
           };
         }.bind(this),
+        
         callback: function (...args) {
           // const start = Date.now()
           const { resourcePath } = this;
           const end = Date.now();
           const [, source] = args;
-          callback({
+          collectCode({
             id: resourcePath,
             name: `${loaderName}【${func.type}】`,
             result: source,
@@ -90,14 +89,17 @@ function pitch(p) { // p绝对路径
           this.callback.apply(this, args);
         }.bind(this),
       });
+
+
       let start = Date.now();
       // 针对3: 拿到return的结果，即可拿到source。
       const ret = func.apply(almostThis, args1); // run 这个 loader。args 是代码字符串。
+      let end = Date.now();
       if (ret && typeof ret === 'string') {
         // const start = Date.now()
         let { resourcePath } = this;
-        const end = Date.now();
-        callback({
+        // const end = Date.now();
+        collectCode({
           id: resourcePath,
           name: `${loaderName}【${func.type}】`,
           result: ret,
@@ -160,24 +162,31 @@ function pitch(p) { // p绝对路径
  * 解决方案：
  * webpack内部用Module.prototype.require来加载loader，那么拦截Module.prototype.require。即可拿到loader
  * * */
-function hijackLoaders(loaderPaths, callback) {
+function hijackLoaders(loaderPaths, proxyLoader) {
+
   const markProxyRequire = (requireRaw) => {
+
     return function proxyRequire(...args) {
-      // if (/cache\-loader/.test(args[0])) {
-      //   debugger
-      // }
-      // arg[0]是绝对路径
-      if (loaderPaths.includes(args[0]) && !/my\-inspect\-webpack\-plugin/.test(args[0])) {
-        const loader = requireRaw.apply(this, args);
-        return callback(loader, args[0]);
+
+      let target = requireRaw.apply(this, args) // 拿到requrie的内容
+
+      const pathString = args[0] // 当前模块的路径(绝对路径)
+      // loaderPaths 是一个数组，是当前模块匹配到的所有loader的路径
+      // 如果require当前路径在loaderPaths数组中存在，代表加载的是处理这个模块的loader，然后拦截这个loader
+      if (loaderPaths.includes(pathString) && !/my\-inspect\-webpack\-plugin/.test(pathString)) {
+        return proxyLoader(target, pathString); // 返回代理loader
       }
-      return requireRaw.apply(this, args);
+      
+      // 否则，什么都不做，requrie啥，就返回啥！
+      return target
     };
   };
+
   const Module = require('module');
   if (!Module.prototype.rawRequire) {
     Module.prototype.rawRequire = Module.prototype.require;
   }
+  // 重写 require
   Module.prototype.require = markProxyRequire(Module.prototype.rawRequire);
 }
 
